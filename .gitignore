@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+# authentication details (SSL Certs)
+auth/
+
+# Firebase config details (API Keys)
+firebase/firebaseConfig.js
