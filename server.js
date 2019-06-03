@@ -1,6 +1,8 @@
-const path = require("path");
 const fs = require("fs");
 const restify = require("restify");
+const Sentry = require('@sentry/node');
+const sentryURL = require('./sentry/sentryConfig');
+Sentry.init({ dsn: sentryURL });
 
 let server = restify.createServer({
   http2: {

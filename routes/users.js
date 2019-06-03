@@ -6,8 +6,9 @@ module.exports = app => {
    * Get all users
    */
   app.get("/users", function(req, res, next) {
-    let users = new Array();
     const usersRef = firebaseDb.collection("users");
+    let users = new Array();
+    
 
     usersRef
       .get()

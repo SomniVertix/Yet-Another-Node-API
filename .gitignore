@@ -65,3 +65,6 @@ auth/
 
 # Firebase config details (API Keys)
 firebase/firebaseConfig.js
+
+# Sentry config details (key and app)
+sentry/
