@@ -5,11 +5,11 @@ const sentryURL = require('./sentry/sentryConfig');
 Sentry.init({ dsn: sentryURL });
 
 let server = restify.createServer({
-  http2: {
+  // http2: {
     cert: fs.readFileSync("./auth/localhost-cert.pem"),
     key: fs.readFileSync("./auth/localhost-key.pem"),
     ca: fs.readFileSync("./auth/localhost-csr.pem")
-  }
+  // }
 });
 
 server.use(restify.plugins.acceptParser(server.acceptable));

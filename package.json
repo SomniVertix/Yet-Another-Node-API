@@ -4,7 +4,8 @@
   "description": "A study on the configuration of Node APIs. The core will be a HTTP2 REST API with security and deployment best practices in mind.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm rebuild && node ./server.js"
   },
   "repository": {
     "type": "git",

@@ -1,17 +1,17 @@
 const firebaseDb = require("../firebase/firebaseInit");
 
 // Place for authorized user with no permissions
-module.exports = app => {
+module.exports = (app) => {
   /**
    * Get all users
    */
   app.get("/users", function(req, res, next) {
-    const usersRef = firebaseDb.collection("users");
+    const usersRef = firebaseDb.collection("users").get();
     let users = new Array();
-    
+    console.log(req.params)
 
     usersRef
-      .get()
+      // .get()
       .then(querySnapsot => {
         querySnapsot.forEach(doc => {
           let data = {
@@ -28,4 +28,5 @@ module.exports = app => {
         next();
       });
   });
+
 };
