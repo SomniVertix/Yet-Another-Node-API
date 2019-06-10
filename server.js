@@ -1,8 +1,11 @@
 const fs = require("fs");
 const restify = require("restify");
-const Sentry = require('@sentry/node');
+// const Sentry = require('@sentry/node');
 const sentryURL = require('./sentry/sentryConfig');
-Sentry.init({ dsn: sentryURL });
+const cors = require("cors")
+
+
+// Sentry.init({ dsn: sentryURL });
 
 let server = restify.createServer({
   http2: {
@@ -13,6 +16,7 @@ let server = restify.createServer({
   }
 });
 
+server.use(cors({}))
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());

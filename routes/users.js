@@ -1,19 +1,38 @@
+"use strict";
 const firebaseDb = require("../firebase/firebaseInit");
+const schemaValidator = require("../schemaValidator");
+const Joi = require("joi");
 
-// Place for authorized user with no permissions
-module.exports = (app) => {
+const GLOBAL_LIMIT = 10;
+const GLOBAL_ORDERBY = "dept";
+
+module.exports = app => {
   /**
    * Get all users
    */
   app.get("/users", function(req, res, next) {
-    const usersRef = firebaseDb.collection("users").get();
     let users = new Array();
-    console.log(req.params)
+
+    const querySchema = Joi.object().keys({
+      limit: Joi.number()
+        .positive()
+        .integer(),
+      orderBy: Joi.string()
+    });
+
+    schemaValidator(querySchema, req, res, next);
+    let limit = req.schema.limit || GLOBAL_LIMIT;
+    let orderBy = req.schema.orderBy || GLOBAL_ORDERBY;
+
+    const usersRef = firebaseDb
+      .collection("users")
+      .orderBy(orderBy)
+      .limit(limit);
 
     usersRef
-      // .get()
-      .then(querySnapsot => {
-        querySnapsot.forEach(doc => {
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
           let data = {
             dept: doc.data().dept,
             name: doc.data().name,
@@ -23,10 +42,8 @@ module.exports = (app) => {
         });
       })
       .then(() => {
-        console.log(users);
         res.send(users);
         next();
       });
   });
-
 };

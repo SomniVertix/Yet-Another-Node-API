@@ -1,5 +1,6 @@
+const Joi = require("joi");
 
-// Place for unauthorized user
+
 module.exports = (app) => {
   app.get("/", function(req, res, next) {
 
