@@ -61,10 +61,11 @@ typings/
 .next
 
 # authentication details (SSL Certs)
-auth/
+/src/certs/
 
-# Firebase config details (API Keys)
-firebase/firebaseConfig.js
+# Config details (API Keys)
+/src/config/firebaseConfig.js
+/src/config/sentryConfig.js
 
-# Sentry config details (key and app)
-sentry/
+# Experimental server with express 
+server2.js

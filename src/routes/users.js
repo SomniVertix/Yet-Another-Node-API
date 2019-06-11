@@ -1,6 +1,6 @@
 "use strict";
-const firebaseDb = require("../firebase/firebaseInit");
-const schemaValidator = require("../schemaValidator");
+const firebaseDb = require("../config/firebaseInit");
+const schemaValidator = require("../lib/utils/schemaValidator");
 const Joi = require("joi");
 
 const GLOBAL_LIMIT = 10;
@@ -45,5 +45,12 @@ module.exports = app => {
         res.send(users);
         next();
       });
+  });
+
+  /**
+   * Get single user
+   */
+  app.get("/users/:id", function(req, res, next) {
+    
   });
 };

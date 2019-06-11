@@ -14,7 +14,7 @@ const validate = (schema, req, res, next) => {
   Joi.validate(
     validationObject,
     schema,
-    { abortEarly: true },
+    { abortEarly: false },
     (err, schemaResult) => {
       if (err) {
         const details = [];
