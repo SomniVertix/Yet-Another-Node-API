@@ -2,8 +2,8 @@ const fs = require("fs");
 const restify = require("restify");
 // const Sentry = require('@sentry/node');
 const sentryURL = require('./src/config/sentryConfig');
-const cors = require("cors")
-
+const cors = require("cors");
+const catchError = require("./src/lib/utils/catchError")
 
 // Sentry.init({ dsn: sentryURL });
 
@@ -23,7 +23,7 @@ server.use(restify.plugins.bodyParser());
 
 // Setup the routing
 fs.readdirSync(`${__dirname}/src/routes`).map(file => {
-  require(`./src/routes/${file}`)(server);
+  require(`./src/routes/${file}`)(server, catchError);
 });
 
 server.listen(8080, function() {
