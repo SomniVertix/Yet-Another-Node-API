@@ -7,8 +7,8 @@ Want updates? I update my dev log every time I add to the project. This goes thr
 https://somnivertix.gitbook.io/workspace/yet-another-node-api/dev-log
 
 ### Other Notes
-// params => /:id
-// query => /:id?limit=66&orderBy=age
-// body => the whole object
+// params => /:id  
+// query => /:id?limit=66&orderBy=age  
+// body => the whole object  
 
 query is things that pertains to the query, ie. What you are looking for. Params(headers) are things that pertains to the overall request (authentication, response format, version, etc.) and body is used to submit new or updated information(eg. A new object)

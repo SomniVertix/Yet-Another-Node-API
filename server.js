@@ -1,9 +1,8 @@
 const fs = require("fs");
 const restify = require("restify");
 // const Sentry = require('@sentry/node');
-const sentryURL = require('./src/config/sentryConfig');
+// const sentryURL = require('./src/config/sentryConfig');
 const cors = require("cors");
-const catchError = require("./src/lib/utils/catchError")
 
 // Sentry.init({ dsn: sentryURL });
 
@@ -16,14 +15,18 @@ let server = restify.createServer({
   }
 });
 
-server.use(cors({}))
+server.use(cors({}));
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
 // Setup the routing
 fs.readdirSync(`${__dirname}/src/routes`).map(file => {
-  require(`./src/routes/${file}`)(server, catchError);
+  require(`./src/routes/${file}`)(server);
+});
+
+server.on("uncaughtException", function(req, res, err, next) {
+  return next("err");
 });
 
 server.listen(8080, function() {

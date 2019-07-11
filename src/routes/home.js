@@ -1,11 +1,8 @@
 "use strict";
-const Joi = require("joi");
 
-
-module.exports = (app) => {
-  app.get("/", function(req, res, next) {
-
-    res.send({ Home: "Home" });
+module.exports = app => {
+  app.get("/home/", function(req, res, next) {
+    res.send("Home");
     next();
   });
 };
