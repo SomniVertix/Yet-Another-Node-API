@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-module.exports = app => {
-  app.get("/home/", function(req, res, next) {
-    res.send("Home");
+module.exports = (app) => {
+  app.get('/home/', function(req, res, next) {
+    res.send('Home');
     next();
   });
 };
