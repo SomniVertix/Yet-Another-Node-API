@@ -66,6 +66,3 @@ typings/
 # Config details (API Keys)
 /src/config/firebaseConfig.js
 /src/config/sentryConfig.js
-
-# Experimental server with express 
-server2.js

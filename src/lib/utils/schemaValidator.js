@@ -25,7 +25,6 @@ const validate = (schema, req, res, next) => {
           throw Error('Invalid schema');
         }
         req.schema = schemaResult;
-        return next();
       }
   );
 };

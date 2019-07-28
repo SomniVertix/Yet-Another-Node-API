@@ -1,34 +1,23 @@
 const fs = require('fs');
-const restify = require('restify');
+const express = require('express');
+const https = require('https');
+const app = express();
 // const Sentry = require('@sentry/node');
-// const sentryURL = require('./src/config/sentryConfig');
-const cors = require('cors');
+// const sentryURL = require("./sentry/sentryConfig");
+// const catchError = require("./src/lib/utils/catchError");
+// const cors = require('cors');
 
 // Sentry.init({ dsn: sentryURL });
 
-const server = restify.createServer({
-  http2: {
-    cert: fs.readFileSync('./src/certs/localhost-cert.pem'),
-    key: fs.readFileSync('./src/certs/localhost-key.pem'),
-    ca: fs.readFileSync('./src/certs/localhost-csr.pem'),
-    allowHTTP1: true,
-  },
-});
+const options = {
+  key: fs.readFileSync('./src/certs/localhost-key.pem'),
+  cert: fs.readFileSync('./src/certs/localhost-cert.pem'),
+};
 
-server.use(cors({}));
-server.use(restify.plugins.acceptParser(server.acceptable));
-server.use(restify.plugins.queryParser());
-server.use(restify.plugins.bodyParser());
-
-// Setup the routing
 fs.readdirSync(`${__dirname}/src/routes`).map((file) => {
-  require(`./src/routes/${file}`)(server);
+  require(`./src/routes/${file}`)(app);
 });
 
-server.on('uncaughtException', function(req, res, err, next) {
-  return next('err');
-});
-
-server.listen(8080, function() {
-  console.log('ready on %s', server.url);
-});
+https
+    .createServer(options, app)
+    .listen(8080);

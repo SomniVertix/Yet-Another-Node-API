@@ -21,6 +21,7 @@ module.exports = (app) => {
     });
 
     schemaValidator(querySchema, req, res, next);
+
     const limit = req.schema.limit || GLOBAL_LIMIT;
     const orderBy = req.schema.orderBy || GLOBAL_ORDERBY;
 
@@ -44,7 +45,6 @@ module.exports = (app) => {
         })
         .then(() => {
           res.send(users);
-          next();
         });
   });
 
@@ -73,7 +73,6 @@ module.exports = (app) => {
         .then(() => {
           const result = user ? user : '{user not found}';
           res.send(result);
-          next();
         });
   });
 };
